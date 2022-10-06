@@ -3,7 +3,11 @@ document.addEventListener("DOMContentLoaded",function (){
    const board_s = [];
    for (x=0;x<9;x++){
        board[x].className = "square";
-       board[x].addEventListener("click",function(){
+       board[x].addEventListener("mouseover", function(event){
+        this.classList.add("hover")});
+       board[x].addEventListener("mouseleave", function(event){
+          this.classList.remove("hover")});
+       board[x].addEventListener("click",function(event){
          if (this.innerHTML == ("X"))
          {
            this.innerHTML = ("O");
@@ -25,8 +29,5 @@ document.addEventListener("DOMContentLoaded",function (){
          //let square = document.getElementById("board").children[x];
          //square.classList.add("X");
        });
-       board[x].addEventListener("onmouseenter",function(){
-        this.classList.add("hover");
-         });
   }
 })
