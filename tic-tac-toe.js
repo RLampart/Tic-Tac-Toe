@@ -57,5 +57,9 @@ document.addEventListener("DOMContentLoaded",function (){
        });
   }
   decision = document.getElementById("game");
+  reset = document.getElementsByClassName("btn")[0];
+  reset.addEventListener("click",function(event){
+      location.reload();
+  });
   
 })
