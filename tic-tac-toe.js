@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded",function (){
    winner = document.getElementById("status");
    const victory = [[0,1,2],[0,3,6],[1,4,7],[2,5,8],[3,4,5],[6,7,8],[0,4,8],[2,4,6]];
    sum = (sum,current) => sum + current;
-   console.log(victory[0]);
    const choose = function(x){
     return function(event){
     if (clicks%2 == 0 && game_state[x] == 0) {
@@ -28,7 +27,6 @@ document.addEventListener("DOMContentLoaded",function (){
     else
        game_state[x] = 1;
     clicks = game_state.reduce(sum);
-    console.log(clicks);
     if (clicks>4){
      for (let match of victory){
        if (board[match[0]].innerHTML == ("X") && board[match[1]].innerHTML == ("X") 
@@ -49,10 +47,6 @@ document.addEventListener("DOMContentLoaded",function (){
     if (game_state[x]>0){
       this.removeEventListener("click",choose(x));
     }
-    console.log(game_state);
-
-    //let square = document.getElementById("board").children[x];
-    //square.classList.add("X");
   }}
 
    
@@ -63,10 +57,8 @@ document.addEventListener("DOMContentLoaded",function (){
        board[x].addEventListener("mouseleave", function(event){
           this.classList.remove("hover")});
        board[x].addEventListener("click",choose(x));
-       console.log(game_state);
 
   }
-  decision = document.getElementById("game");
   reset = document.getElementsByClassName("btn")[0];
   reset.addEventListener("click",function(event){
       location.reload();
