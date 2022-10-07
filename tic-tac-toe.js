@@ -1,42 +1,47 @@
 document.addEventListener("DOMContentLoaded",function (){
-   var board = document.getElementById("board").children;
+   let board = document.getElementById("board").children;
    let clicks = 0;
    game_state = [0,0,0,0,0,0,0,0,0];
    winner = document.getElementById("status");
    const victory = [[0,1,2],[0,3,6],[1,4,7],[2,5,8],[3,4,5],[6,7,8],[0,4,8],[2,4,6]];
+   sum = (sum,current) => sum + current;
    console.log(victory[0]);
    const choose = function(x){
     return function(event){
     if (clicks%2 == 0 && game_state[x] == 0) {
-      this.innerHTML = ("X");
+      this.innerHTML = "X";
       this.classList.add("X");
     }  
     else if ((clicks%2 != 0 && game_state[x] == 0) || clicks == 1)
     {
-      this.innerHTML = ("O");
+      this.innerHTML = "O";
+      this.classList.remove("X");
       this.classList.add("O");
+      
     }
-    game_state[x] = 1;
-    clicks = 0
-    for (let num of game_state)
-         clicks += num;
+    if (clicks==0)
+       prime = x;
+    if (prime == x && game_state.reduce(sum)==1)
+       game_state[x] += 1;
+    else if(prime == x && game_state.reduce(sum)>=1 && game_state[x] == 2)
+       game_state[x] = 2;
+    else
+       game_state[x] = 1;
+    clicks = game_state.reduce(sum);
     console.log(clicks);
-    if (clicks>5){
+    if (clicks>4){
      for (let match of victory){
-       console.log(match);
        if (board[match[0]].innerHTML == ("X") && board[match[1]].innerHTML == ("X") 
        && board[match[2]].innerHTML == ("X")){
-         winner.innerHTML = ("Congratulations! X is the Winner!");
+         winner.innerHTML = "Congratulations! X is the Winner!";
          winner.className = "you-won";
          break;
-   
        }
        else if (board[match[0]].innerHTML == ("O") && board[match[1]].innerHTML == ("O") 
        && board[match[2]].innerHTML == ("O")){
-         winner.innerHTML = ("Congratulations! O is the Winner!");
+         winner.innerHTML = "Congratulations! O is the Winner!";
          winner.className = "you-won";
          break;
-   
        }
      }
     }
